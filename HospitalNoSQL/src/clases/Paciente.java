@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class Paciente extends BasicDBObject{
     
-    protected final String IDPACIENTE = "idPaciente";
+    protected final String IDPACIENTE = "_id";
     protected final String NOMBREP1 = "nombreP1";
     protected final String NOMBREP2 = "nombreP2";
     protected final String APELLIDOP1 = "ApellidoP1";
@@ -43,9 +43,10 @@ public class Paciente extends BasicDBObject{
         this.put(IDEPS, idEPS);
     }
     
+    @Override
     public void markAsPartialObject() {
         Set<String> set = keySet();
-        set.remove("_id");
+       
 
         Set<String> setThis = new HashSet<String>();
         setThis.add(IDPACIENTE);
@@ -138,7 +139,7 @@ public class Paciente extends BasicDBObject{
         this.put(ESTRATOP, estratoP);
     }
 
-    public void setIDEPS(String idEPS) {
+    public void setIDEPS(int idEPS) {
         this.put(IDEPS, idEPS);
     }   
 

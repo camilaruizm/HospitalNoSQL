@@ -14,7 +14,7 @@ import java.util.Set;
  * @author USER
  */
 public class Consulta extends BasicDBObject{
-    protected final String IDCONSULTA = "idConsulta";
+    protected final String IDCONSULTA = "_id";
     protected final String IDPACIENTE = "idPaciente";
     protected final String IDMEDICO = "idMedico";
     protected final String NUMEROCONSULTA = "numeroConsulta";

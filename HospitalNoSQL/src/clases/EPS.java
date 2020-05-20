@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package clases;
-
 import com.mongodb.BasicDBObject;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,14 +13,14 @@ import java.util.Set;
  * @author USER
  */
 public class EPS extends BasicDBObject{
-    protected final String IDEPS = "idEPS";
+
     protected final String NOMBREEPS = "nombreEPS";
     protected final String NUMCONSECUTIVO = "NumeroConsecutivo";
     
     private boolean partial;
 
-    public EPS(int idEPS, String nombreEPS, int numConsecutivo) {
-        this.put(IDEPS, idEPS);
+    public EPS( String nombreEPS, int numConsecutivo) {
+
         this.put(NOMBREEPS, nombreEPS);
         this.put(NUMCONSECUTIVO, numConsecutivo);
     }
@@ -32,7 +31,7 @@ public class EPS extends BasicDBObject{
         set.remove("_id");
 
         Set<String> setThis = new HashSet<String>();
-        setThis.add(IDEPS);
+     
         setThis.add(NOMBREEPS);
         setThis.add(NUMCONSECUTIVO);
         
@@ -48,13 +47,6 @@ public class EPS extends BasicDBObject{
         this.partial = partial;
     }
 
-    public String getIDEPS() {
-        return this.getString(IDEPS);
-    }
-
-    public void setIDEPS(String idEPS) {
-        this.put(IDEPS, idEPS);
-    }
 
     public String getNOMBREEPS() {
         return this.getString(NOMBREEPS);
@@ -74,6 +66,6 @@ public class EPS extends BasicDBObject{
 
     @Override
     public String toString() {
-        return "EPS{" + "IDEPS=" + IDEPS + ", NOMBREEPS=" + NOMBREEPS + ", NUMCONSECUTIVO=" + NUMCONSECUTIVO + '}';
+        return "EPS{" + "IDEPS=" + ", NOMBREEPS=" + NOMBREEPS + ", NUMCONSECUTIVO=" + NUMCONSECUTIVO + '}';
     }
 }

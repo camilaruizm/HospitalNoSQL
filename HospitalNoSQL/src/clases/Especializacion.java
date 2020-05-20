@@ -14,7 +14,7 @@ import java.util.Set;
  * @author USER
  */
 public class Especializacion extends BasicDBObject{
-    protected final String IDESPECIALIZACION = "idEspecializacion";
+    protected final String IDESPECIALIZACION = "_id";
     protected final String TIPOESPECIALIZACION = "TipoEspecializacion";
     
     private boolean partial;
@@ -31,8 +31,7 @@ public class Especializacion extends BasicDBObject{
     @Override
     public void markAsPartialObject() {
         Set<String> set = keySet();
-        set.remove("_id");
-
+      
         Set<String> setThis = new HashSet<String>();
         setThis.add(IDESPECIALIZACION);
         setThis.add(TIPOESPECIALIZACION);
