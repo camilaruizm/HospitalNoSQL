@@ -31,7 +31,7 @@ public class Medico extends BasicDBObject{
         partial = false;
     }
     
-    public Medico(int idMedico, String nombre1, String nombre2, String apellido1, String apellido2, int telefono1, int telefono2, int numMatricula,LinkedList<Integer> Especializacion){
+    public Medico(int idMedico, String nombre1, String nombre2, String apellido1, String apellido2, int telefono1, int telefono2, int numMatricula,LinkedList<Especializacion> esp){
         this.put(IDMEDICO, idMedico);
         this.put(NOMBREM1, nombre1);
         this.put(NOMBREM2, nombre2);
@@ -40,7 +40,7 @@ public class Medico extends BasicDBObject{
         this.put(TELEFONOM1, telefono1);
         this.put(TELEFONOM2, telefono2);
         this.put(NUMATRICULA, numMatricula);
-        this.put(ESPECIALIZACION, Especializacion);
+        this.put(ESPECIALIZACION, esp);
     }
     
     @Override
@@ -178,8 +178,8 @@ public class Medico extends BasicDBObject{
     public String getESPECIALIZACION() {
         return this.ESPECIALIZACION;
     }
-    public void setESPECIALIZACION(LinkedList Especializacion) {
-        this.put(ESPECIALIZACION, Especializacion);
+    public void setESPECIALIZACION(LinkedList esp) {
+        this.put(ESPECIALIZACION, esp);
     } 
     
 
