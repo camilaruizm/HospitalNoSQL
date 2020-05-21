@@ -39,10 +39,10 @@ public class HospitalNoSQL {
                 Medico m1 = new Medico(1, "Juan", "Camilo", "Ruiz", "Martinez", 3128781, 321654, 587965, esp);
                 DBCollection collection2 = ob.getCollection(m1.getClass().getSimpleName());
              
+                EPS ep1 = new EPS(1,"Coomeva",520);
+                DBCollection collection5 = ob.getCollection(ep1.getClass().getSimpleName());
                 
                 
-                EPS ep = new EPS("coomeva", 1);
-                EPS ep2 = new EPS("Sura", 2);
                 Paciente p1 = new Paciente(1, "Maria", "Camila", "Ruiz", "Martinez", "Calle 33a #6-03", 21, 4, 1);
                 Paciente p2 = new Paciente(2, "Laura", "Camila", "Ruiz", "Martinez", "Calle 33a #6-03", 21, 4, 2);
                 DBCollection collection = ob.getCollection(p1.getClass().getSimpleName());
@@ -56,6 +56,7 @@ public class HospitalNoSQL {
                     collection2.insert(m1);
                     collection3.insert(p2);
                     collection4.insert(c1);
+                    collection5.insert(ep1);
 
                 } catch (MongoException ex) {
                 }

@@ -13,14 +13,14 @@ import java.util.Set;
  * @author USER
  */
 public class EPS extends BasicDBObject{
-
+    protected final String IDEPS = "_id";
     protected final String NOMBREEPS = "nombreEPS";
     protected final String NUMCONSECUTIVO = "NumeroConsecutivo";
     
     private boolean partial;
 
-    public EPS( String nombreEPS, int numConsecutivo) {
-
+    public EPS( int idEPS,String nombreEPS, int numConsecutivo) {
+        this.put(IDEPS, idEPS);
         this.put(NOMBREEPS, nombreEPS);
         this.put(NUMCONSECUTIVO, numConsecutivo);
     }
@@ -31,7 +31,7 @@ public class EPS extends BasicDBObject{
         set.remove("_id");
 
         Set<String> setThis = new HashSet<String>();
-     
+        setThis.add(IDEPS);
         setThis.add(NOMBREEPS);
         setThis.add(NUMCONSECUTIVO);
         
@@ -46,7 +46,14 @@ public class EPS extends BasicDBObject{
     public void setPartial(boolean partial) {
         this.partial = partial;
     }
+    
+     public String getIDeps() {
+        return this.getString(IDEPS);
+    }
 
+    public void setIDEPS(String nombreEPS) {
+        this.put(NOMBREEPS, nombreEPS);
+    }
 
     public String getNOMBREEPS() {
         return this.getString(NOMBREEPS);
@@ -66,6 +73,6 @@ public class EPS extends BasicDBObject{
 
     @Override
     public String toString() {
-        return "EPS{" + "IDEPS=" + ", NOMBREEPS=" + NOMBREEPS + ", NUMCONSECUTIVO=" + NUMCONSECUTIVO + '}';
+        return "EPS{" + "IDEPS=" + IDEPS +  ", NOMBREEPS=" + NOMBREEPS + ", NUMCONSECUTIVO=" + NUMCONSECUTIVO + '}';
     }
 }
