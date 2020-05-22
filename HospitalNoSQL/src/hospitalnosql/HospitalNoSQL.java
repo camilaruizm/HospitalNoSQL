@@ -10,8 +10,11 @@ import clases.EPS;
 import clases.Especializacion;
 import clases.Medico;
 import clases.Paciente;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
@@ -30,7 +33,7 @@ public class HospitalNoSQL {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+            
         try {
             DB ob = createConnection();
             if (ob != null) {
@@ -75,11 +78,36 @@ public class HospitalNoSQL {
 
         //String mongoCloudURI = data.getMongoURI();
         //   String mongoCloudURI = data.getMongoURILocal();
-        MongoClientURI uri = new MongoClientURI("mongodb+srv://camilaruiz028:camilaruiz028@cluster0-gjcmu.azure.mongodb.net/test?retryWrites=true&w=majority");
+        MongoClientURI uri = new MongoClientURI("mongodb+srv://kastalco:adidas20@cluster0-3vbyt.gcp.mongodb.net/test?retryWrites=true&w=majority");
         //mongodb+srv://pruebaadmin:<password>@cluster0-tlwaa.mongodb.net/test?retryWrites=true&w=majority
         System.out.println("cadena " + uri.toString());
         client = new MongoClient(uri);
 
         return client.getDB("HOSPITAL");
+        
+        
     }
+    
+    private DB db;
+    
+    public LinkedList<? extends BasicDBObject> findAll(Class<? extends BasicDBObject> Paciente)
+        {     
+            LinkedList<BasicDBObject> r = new LinkedList<BasicDBObject>();
+            DBCollection collection= db.getCollection(Paciente.getSimpleName());
+            collection.setObjectClass(Paciente);
+            DBCursor cursor = collection.find();
+            while(cursor.hasNext())
+            {
+            DBObject objectAux = cursor.next();
+            r.add((BasicDBObject) objectAux);    
+            }
+            
+            return r;
+        }
+        
+        
+       
+            
+            
+        }
 }
