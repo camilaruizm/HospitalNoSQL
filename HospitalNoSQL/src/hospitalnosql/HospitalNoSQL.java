@@ -33,26 +33,24 @@ public class HospitalNoSQL {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-            
+
         try {
             DB ob = createConnection();
             if (ob != null) {
                 LinkedList<Especializacion> esp = new LinkedList<>();
-                esp.add(new Especializacion(1,"Cardiología"));  
+                esp.add(new Especializacion(1, "Cardiología"));
                 Medico m1 = new Medico(1, "Juan", "Camilo", "Ruiz", "Martinez", 3128781, 321654, 587965, esp);
                 DBCollection collection2 = ob.getCollection(m1.getClass().getSimpleName());
-             
-                EPS ep1 = new EPS(1,"Coomeva",520);
+
+                EPS ep1 = new EPS(1, "Coomeva", 520);
                 DBCollection collection5 = ob.getCollection(ep1.getClass().getSimpleName());
-                
-                
+
                 Paciente p1 = new Paciente(1, "Maria", "Camila", "Ruiz", "Martinez", "Calle 33a #6-03", 21, 4, 1);
                 Paciente p2 = new Paciente(2, "Laura", "Camila", "Ruiz", "Martinez", "Calle 33a #6-03", 21, 4, 2);
                 DBCollection collection = ob.getCollection(p1.getClass().getSimpleName());
                 DBCollection collection3 = ob.getCollection(p2.getClass().getSimpleName());
-                
-                
-                Consulta c1 = new Consulta(1,1,1,1,"Problemas de espalda","Hernia Discal","Operación",250000);
+
+                Consulta c1 = new Consulta(1, 1, 1, 1, "Problemas de espalda", "Hernia Discal", "Operación", 250000);
                 DBCollection collection4 = ob.getCollection(c1.getClass().getSimpleName());
                 try {
                     collection.insert(p1);
@@ -78,36 +76,57 @@ public class HospitalNoSQL {
 
         //String mongoCloudURI = data.getMongoURI();
         //   String mongoCloudURI = data.getMongoURILocal();
-        MongoClientURI uri = new MongoClientURI("mongodb+srv://kastalco:adidas20@cluster0-3vbyt.gcp.mongodb.net/test?retryWrites=true&w=majority");
+        MongoClientURI uri = new MongoClientURI("mongodb+srv://iDenTicsc:sebax081199@cluster0-xnntb.azure.mongodb.net/test?retryWrites=true&w=majority");
         //mongodb+srv://pruebaadmin:<password>@cluster0-tlwaa.mongodb.net/test?retryWrites=true&w=majority
         System.out.println("cadena " + uri.toString());
         client = new MongoClient(uri);
 
         return client.getDB("HOSPITAL");
-        
-        
+
     }
-    
+
     private DB db;
-    
-    public LinkedList<? extends BasicDBObject> findAll(Class<? extends BasicDBObject> Paciente)
-        {     
-            LinkedList<BasicDBObject> r = new LinkedList<BasicDBObject>();
-            DBCollection collection= db.getCollection(Paciente.getSimpleName());
-            collection.setObjectClass(Paciente);
-            DBCursor cursor = collection.find();
-            while(cursor.hasNext())
-            {
+
+    public LinkedList<? extends BasicDBObject> findAll(Class<? extends BasicDBObject> Paciente) {
+        LinkedList<BasicDBObject> r = new LinkedList<BasicDBObject>();
+        DBCollection collection = db.getCollection(Paciente.getSimpleName());
+        collection.setObjectClass(Paciente);
+        DBCursor cursor = collection.find();
+        while (cursor.hasNext()) {
             DBObject objectAux = cursor.next();
-            r.add((BasicDBObject) objectAux);    
-            }
-            
-            return r;
+            r.add((BasicDBObject) objectAux);
+        }
+
+        return r;
+    }
+
+    public LinkedList<? extends BasicDBObject> find(Class<? extends BasicDBObject> Paciente, String AtributoSolicitado, Paciente pac) {
+        LinkedList<BasicDBObject> r = new LinkedList<>();
+        BasicDBObject query = new BasicDBObject(AtributoSolicitado, pac);
+        DBCollection coleccion = db.getCollection(Paciente.getSimpleName());
+        coleccion.setObjectClass(Paciente);
+        DBCursor cursor = coleccion.find(query);
+        while (cursor.hasNext()) {
+            DBObject objectAux = cursor.next();
+            r.add((BasicDBObject) objectAux);
+        }
+
+        return r;
+    }
+
+    public LinkedList<? extends BasicDBObject> findPerTime(Class<? extends BasicDBObject> Paciente, String AtributoSolicitado, Number min, Number max) {
+        LinkedList<BasicDBObject> r = new LinkedList<>();
+        BasicDBObject query = new BasicDBObject(AtributoSolicitado, new BasicDBObject("Sgt", min).append("Site", max));
+        DBCollection coleccion = db.getCollection(Paciente.getSimpleName());
+        coleccion.setObjectClass(Paciente);
+        DBCursor cursor = coleccion.find(query);
+        while(cursor.hasNext())
+        {
+            DBObject objAux = cursor.next();
+            r.add((BasicDBObject) objAux);
         }
         
-        
-       
-            
-            
-        }
+        return r;
+    }
+
 }
